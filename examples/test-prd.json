@@ -1,0 +1,33 @@
+{
+  "project": "Test Loop Project",
+  "branchName": "feature/test-loop",
+  "description": "Simple test project for loop execution",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Create a simple greeting function",
+      "description": "Create a TypeScript function that returns a greeting message",
+      "acceptanceCriteria": [
+        "Function accepts a name parameter",
+        "Function returns a greeting string",
+        "Function is exported"
+      ],
+      "priority": 1,
+      "estimatedComplexity": 1,
+      "passes": true
+    },
+    {
+      "id": "US-002",
+      "title": "Add timestamp to greeting",
+      "description": "Enhance the greeting function to include current timestamp",
+      "acceptanceCriteria": [
+        "Greeting includes ISO timestamp",
+        "Timestamp is current",
+        "Format is consistent"
+      ],
+      "priority": 2,
+      "estimatedComplexity": 1,
+      "passes": true
+    }
+  ]
+}

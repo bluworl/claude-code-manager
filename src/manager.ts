@@ -9,12 +9,14 @@ import {
   LoopResult
 } from './types';
 import { SingleShotExecutor } from './executors/single-shot';
+import { LoopExecutor } from './executors/loop';
 import { SkillInstaller } from './skills/installer';
 
 export class ClaudeCodeManager {
   private config: Required<Omit<ClaudeCodeManagerConfig, 'hooks' | 'globalTimeout'>> &
     Pick<ClaudeCodeManagerConfig, 'hooks' | 'globalTimeout'>;
   private singleShotExecutor: SingleShotExecutor;
+  private loopExecutor: LoopExecutor;
 
   constructor(config?: ClaudeCodeManagerConfig) {
     this.config = {
@@ -28,6 +30,11 @@ export class ClaudeCodeManager {
     };
 
     this.singleShotExecutor = new SingleShotExecutor({
+      claudeCodePath: this.config.claudeCodePath,
+      tempDir: this.config.tempDir
+    });
+
+    this.loopExecutor = new LoopExecutor({
       claudeCodePath: this.config.claudeCodePath,
       tempDir: this.config.tempDir
     });
@@ -46,8 +53,21 @@ export class ClaudeCodeManager {
   }
 
   async executeLoop(options: ExecuteLoopOptions): Promise<LoopResult> {
-    // TODO: Implement loop execution
-    throw new Error('Not implemented');
+    // Call beforeIteration hook if provided
+    if (this.config.hooks?.beforeIteration) {
+      await this.config.hooks.beforeIteration(0);
+    }
+
+    const result = await this.loopExecutor.execute(options);
+
+    // Call afterIteration hook if provided
+    if (this.config.hooks?.afterIteration && result.iterations.length > 0) {
+      await this.config.hooks.afterIteration(
+        result.iterations[result.iterations.length - 1]
+      );
+    }
+
+    return result;
   }
 
   static async installSkills(skillsDir?: string): Promise<void> {

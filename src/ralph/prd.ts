@@ -50,6 +50,10 @@ export class PRD {
     }
   }
 
+  markStoryComplete(id: string): void {
+    this.updateStory(id, { passes: true });
+  }
+
   isComplete(): boolean {
     return this.spec.userStories.every(s => s.passes);
   }
