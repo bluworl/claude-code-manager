@@ -42,6 +42,7 @@ export interface ProcessOptions {
 export interface ExecuteOptionsBase {
   prompt: string;
   variables?: Record<string, any>;
+  skill?: string;
   timeout?: number;
   errorStrategy?: ErrorStrategy;
   onOutput?: (chunk: string) => void;
