@@ -49,11 +49,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bluworl/claude-code-manager.git"
+    "url": "git+https://github.com/cardinal-solar/claude-code-manager.git"
   },
-  "homepage": "https://github.com/bluworl/claude-code-manager#readme",
+  "homepage": "https://github.com/cardinal-solar/claude-code-manager#readme",
   "bugs": {
-    "url": "https://github.com/bluworl/claude-code-manager/issues"
+    "url": "https://github.com/cardinal-solar/claude-code-manager/issues"
   },
   "dependencies": {
     "uuid": "^9.0.1",
